@@ -19,6 +19,16 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
@@ -41,7 +51,9 @@
         <dependency>
             <groupId>bluej</groupId>
             <artifactId>bluejext2</artifactId>
+            <type>jar</type>
             <version>5.0.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -49,5 +61,17 @@
             <version>${javafx.version}</version>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <!--
+            Need to add the local directory "lib" as a repository,
+            since the BlueJ Extension API-jar is not in a Maven repo
+        -->
+        <repository>
+            <id>project_lib</id>
+            <name>Repository in project's lib dir</name>
+            <layout>default</layout>
+            <url>file:///${project.basedir}/lib</url>
+            <releases><enabled>true</enabled></releases>
+        </repository>
+    </repositories>
 </project>
